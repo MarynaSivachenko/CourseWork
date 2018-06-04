@@ -1,0 +1,26 @@
+# depslib dependency file v1.0
+1528134426 source:c:\users\ф\desktop\Курсовая\kursach\coloda.cpp
+	"coloda.h"
+	<iostream>
+	<stdlib.h>
+	<ctime>
+
+1528134432 c:\users\ф\desktop\Курсовая\kursach\coloda.h
+	<string>
+
+1528134960 source:c:\users\ф\desktop\Курсовая\kursach\player_list.cpp
+	"player_list.h"
+	<iostream>
+	<stdlib.h>
+	<ctime>
+
+1528132590 c:\users\ф\desktop\Курсовая\kursach\player_list.h
+	<string>
+
+1528051461 source:c:\users\ф\desktop\Курсовая\kursach\main.cpp
+	<iostream>
+	<string>
+	<stdio.h>
+	"coloda.h"
+	"player_list.h"
+
