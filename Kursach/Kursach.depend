@@ -24,3 +24,30 @@
 	"coloda.h"
 	"player_list.h"
 
+1528223820 source:d:\git\coursework\coursework\kursach\coloda.cpp
+	"coloda.h"
+	<iostream>
+	<stdlib.h>
+	<ctime>
+
+1528134432 d:\git\coursework\coursework\kursach\coloda.h
+	<string>
+
+1528224068 source:d:\git\coursework\coursework\kursach\player_list.cpp
+	"player_list.h"
+	<iostream>
+	<stdlib.h>
+	<ctime>
+
+1528132590 d:\git\coursework\coursework\kursach\player_list.h
+	<string>
+
+1528223788 source:d:\git\coursework\coursework\kursach\main.cpp
+	<iostream>
+	<string>
+	<stdio.h>
+	"coloda.h"
+	"player_list.h"
+	<map>
+	<exception>
+

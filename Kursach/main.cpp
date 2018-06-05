@@ -3,7 +3,8 @@
 #include <stdio.h>
 #include "coloda.h"
 #include "player_list.h"
-
+#include <map>
+#include <exception>
 using namespace std;
 
 int convert(string data);
@@ -20,21 +21,21 @@ int main()
     cout<<"Enter num of players[2-4]::\n";
     cin>>Total_Players;
     if (Total_Players<2 || Total_Players>4)
-        Total_Players=4;
+        Total_Players = 4;
     PLAYER_Element * players = new PLAYER_Element[Total_Players];
     Init2(players,Total_Players);
     printNames(players,Total_Players);
     int games = 1;
     cout <<"\n\nGame "<<games<<":\n";
 
-    for (;games<=3; ++games)
+    for (; games <= 3; ++games)
     {
-            for (int i=0;i<Total_Players;++i)
-            {
-                players[i].value=convert(pop(&Temp));
-            }
+            for (int i = 0; i < Total_Players; ++i)
+                {
+                    players[i].value = convert(pop(&Temp));
+                }
 
-        for (int i=0;i<Total_Players;++i)
+        for (int i = 0; i < Total_Players; ++i)
         {
           cout<<"Hodit::"<<players[i].name<<endl<<"Enter Y dla vziatiya carty\n";
           cout<<"Tvoy ochky::"<<players[i].value<<endl;
@@ -42,38 +43,61 @@ int main()
           do
           {
               cin>>com;
-              if(com.find("y")!=0)
-                        break;
-              card_name=pop(&Temp);
+              if(com.find("y") != 0)    break;
+              card_name = pop(&Temp);
               cout<<"Ti dostal "<<card_name<<endl;
-              players[i].value=players[i].value+convert(card_name);
+              try
+                  {
+                    players[i].value = players[i].value + convert(card_name);
+                  }
+              catch (exception &e)  {   cerr<<e.what()<<endl;}
               cout<<"Tvoy ochky::"<<players[i].value<<endl<<"Enter Y dla vziatiya carty\n";
-          }while(players[i].value<21) ;
+          }while(players[i].value < 21) ;
         }
         int CounterWinners = 0;
         int MaxValue = 21;
 
         do {
-             for (int i=0;i<Total_Players;++i)
-             {
-                 if (players[i].value == MaxValue)
+             for (int i = 0; i < Total_Players; ++i)
                  {
-                    players[i].TotalScore ++;
-                    CounterWinners++;
+                     if (players[i].value == MaxValue)
+                         {
+                            players[i].TotalScore ++;
+                            CounterWinners++;
+                         }
                  }
-             }
              --MaxValue;
-        }while (CounterWinners == 0 && MaxValue !=0);
+        }while (CounterWinners == 0 && MaxValue != 0);
 
         printNames(players,Total_Players);
 
-        for (int i=0;i<Total_Players;++i)   {  players[i].value = 0;}
+        for (int i = 0; i < Total_Players; ++i)   {  players[i].value = 0;}
     }
 }
 
 int convert(string data)
 {
-    if (data.find("T ")!=-1)
+     static map <string,int> DictScore = {{ "T ", 1 },
+                                         { "K ", 4 },
+                                         { "D ", 3 },
+                                         { "B ", 2 },
+                                         { "10", 10 },
+                                         { "9 ", 9 },
+                                         { "8 ", 8 },
+                                         { "7 ", 7 },
+                                         { "6 ", 6 }};
+    if (data.empty() != true)
+        data.erase(data.begin() +2, data.end());
+    if (DictScore.find(data) != DictScore.end())
+        {
+            return DictScore[data];
+        }
+    throw logic_error("incorrect conversion");
+
+
+
+
+   /* if (data.find("T ")!=-1)
         return 1;
     if (data.find("K ")!=-1)
         return 4;
@@ -90,5 +114,5 @@ int convert(string data)
     if (data.find("7")!=-1)
         return 7;
     if (data.find("6")!=-1)
-        return 6;
+        return 6;*/
 }
